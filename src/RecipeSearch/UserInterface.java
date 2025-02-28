@@ -15,10 +15,12 @@ public class UserInterface {
         System.out.print("Files to read: ");
         String file = scanner.nextLine();
         ArrayList<Recipes> recipes = readRecipesFromFile(file);
-        System.out.println(recipes);
 
         System.out.println("Commands:");
         System.out.println("list - lists the recipes");
+        System.out.println("find name - search recipes by name");
+        System.out.println("find cooking time - search recipes by cooking time");
+        System.out.println("ingredient - search recipes by ingredient");
         System.out.println("stop - stops the program");
         System.out.println("");
 
@@ -31,6 +33,34 @@ public class UserInterface {
                 System.out.println("Recipes: ");
                 for (Recipes recipe : recipes) {
                     System.out.println(recipe);
+                }
+            } else if (command.equals("find name")) {
+                System.out.print("Search for: ");
+                String recipeName = scanner.nextLine();
+
+                System.out.println("Recipes: ");
+                for (Recipes recipe : recipes) {
+                    if (recipe.getName().contains(recipeName)) {
+                        System.out.println(recipe);
+                    }
+                }
+            } else if (command.equals("find cooking time")) {
+                System.out.print("Max cooking time: ");
+                int maxTime = Integer.valueOf(scanner.nextLine());
+
+                for (Recipes recipe : recipes) {
+                    if (recipe.getTime() <= maxTime) {
+                        System.out.println(recipe);
+                    }
+                }
+            } else if(command.equals("ingredient")){
+                System.out.print("Ingredient: ");
+                String ingredient = scanner.nextLine();
+
+                for(Recipes recipe : recipes){
+                    if(recipe.getIngredients().contains(ingredient)){
+                        System.out.println(recipe);
+                    }
                 }
             } else {
                 break;
